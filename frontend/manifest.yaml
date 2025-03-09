@@ -27,7 +27,10 @@ spec:
       containers:
       - name: frontend
       #manifesto file
-        image: khalidaws2024/frontend:1.2.3
+        image: khalidaws2024/frontend:1.2.4
+        ports:
+        - containerPort: 8080
+
 ---
 kind: Service
 apiVersion: v1
@@ -42,5 +45,5 @@ spec:
     project: expense
   ports:
   - protocol: TCP
-    port: 80 #service port
-    targetPort: 80 # mandatory
+    port: 80   #service port
+    targetPort: 8080 # mandatory
