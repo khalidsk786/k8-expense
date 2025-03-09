@@ -2,6 +2,7 @@ kind: Deployment
 apiVersion: apps/v1
 metadata:
   name: mysql
+  #we must give namespace name otherwise it will go by default
   namespace: expense
   #labels of deployment resource
   labels:
@@ -26,6 +27,4 @@ spec:
       containers:
       - name: mysql
       #manifesto file
-        image: khalidaws2024/deployment:1.0.0
-        ports:
-        - containerPort: 80
+        image: khalidaws2024/mysql:1.0.0
