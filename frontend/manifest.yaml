@@ -1,0 +1,46 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: frontend
+  #we must give namespace name otherwise it will go by default
+  namespace: expense
+  #labels of deployment resource
+  labels:
+    app: frontend
+    tier: web
+    project: expense
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+      tier: web
+      project: expense
+  ##pod template
+  template:
+    metadata:
+      labels:
+        app: frontend
+        tier: web
+        project: expense 
+    spec:
+      containers:
+      - name: frontend
+      #manifesto file
+        image: khalidaws2024/frontend:1.2.3
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: frontend
+  namespace: expense
+spec:
+  type: LoadBalancer
+  selector: # labels are used as selectors
+    app: frontend
+    tier: web
+    project: expense
+  ports:
+  - protocol: TCP
+    port: 80 #service port
+    targetPort: 80 # mandatory
