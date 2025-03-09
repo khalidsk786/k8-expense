@@ -1,0 +1,31 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: mysql
+  namespace: expense
+  #labels of deployment resource
+  labels:
+    app: mysql
+    tier: mysql
+    project: expense
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+      tier: mysql
+      project: expense
+  ##pod template
+  template:
+    metadata:
+      labels:
+        app: mysql
+        tier: mysql
+        project: expense 
+    spec:
+      containers:
+      - name: mysql
+      #manifesto file
+        image: khalidaws2024/deployment:1.0.0
+        ports:
+        - containerPort: 80
